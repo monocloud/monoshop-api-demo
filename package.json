@@ -1,0 +1,16 @@
+{
+  "name": "mono-shop",
+  "version": "1.0.0",
+  "description": "A monorepo demonstrating progressive authentication with MonoCloud",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm -r --parallel run dev",
+    "build": "pnpm -r run build",
+    "lint": "pnpm -r run lint",
+    "type-check": "pnpm -r run type-check"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  }
+}
