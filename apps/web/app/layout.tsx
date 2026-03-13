@@ -1,10 +1,14 @@
+import { isAuthenticated } from "@monocloud/auth-nextjs";
+import { SignIn, SignOut } from "@monocloud/auth-nextjs/components";
 import React from "react";
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const authenticated = await isAuthenticated();
+
   return (
     <html lang="en">
       <body style={styles.body}>
@@ -17,16 +21,36 @@ export default function RootLayout({
                   Dashboard
                 </a>
               </li>
-              <li>
-                <a href="/products" style={styles.navLink}>
-                  Products
-                </a>
-              </li>
-              <li>
-                <a href="/invoices" style={styles.navLink}>
-                  Invoices
-                </a>
-              </li>
+              {authenticated ? (
+                <>
+                  <li>
+                    <a href="/products" style={styles.navLink}>
+                      Products
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/invoices" style={styles.navLink}>
+                      Invoices
+                    </a>
+                  </li>
+
+                  <SignOut
+                    children={
+                      <li>
+                        <div style={styles.navLink}>Sign Out</div>
+                      </li>
+                    }
+                  ></SignOut>
+                </>
+              ) : (
+                <SignIn
+                  children={
+                    <li>
+                      <div style={styles.navLink}>Sign In</div>
+                    </li>
+                  }
+                ></SignIn>
+              )}
             </ul>
           </div>
         </nav>

@@ -1,11 +1,15 @@
+import { isAuthenticated } from "@monocloud/auth-nextjs";
 import { getInvoices, getProducts } from "./actions/api";
 
 export default async function DashboardPage() {
-  const [productsRes, invoicesRes] = 
-    await Promise.all([
+  const authenticated = await isAuthenticated();
+
+  const [productsRes, invoicesRes] = authenticated
+    ? await Promise.all([
         getProducts(),
         getInvoices(),
-      ]);
+      ])
+    : [null, null];
 
   const products = productsRes?.success ? productsRes.result : [];
   const invoices = invoicesRes?.success ? invoicesRes.result : [];
@@ -40,7 +44,9 @@ export default async function DashboardPage() {
       <div style={styles.section}>
         <h2>Recent Products</h2>
         <div style={styles.itemList}>
-          {!productsRes?.success ? (
+          {!authenticated ? (
+            <div style={styles.status}>Sign In to view products</div>
+          ) : !productsRes?.success ? (
             <div style={styles.status}>Error loading products</div>
           ) : products.length === 0 ? (
             <div style={styles.status}>No products found</div>
@@ -58,7 +64,9 @@ export default async function DashboardPage() {
       <div style={styles.section}>
         <h2>Recent Invoices</h2>
         <div style={styles.itemList}>
-          {!invoicesRes?.success ? (
+          {!authenticated ? (
+            <div style={styles.status}>Sign In to view invoices</div>
+          ) : !invoicesRes?.success ? (
             <div style={styles.status}>Error loading invoices</div>
           ) : invoices.length === 0 ? (
             <div style={styles.status}>No invoices found</div>
