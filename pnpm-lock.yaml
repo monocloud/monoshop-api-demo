@@ -40,6 +40,25 @@ importers:
         specifier: ^5.0.0
         version: 5.9.3
 
+  packages/auth:
+    dependencies:
+      express:
+        specifier: ^4.18.2
+        version: 4.22.1
+      jose:
+        specifier: ^5.0.0
+        version: 5.10.0
+    devDependencies:
+      '@types/express':
+        specifier: ^4.17.21
+        version: 4.17.25
+      '@types/node':
+        specifier: ^20.0.0
+        version: 20.19.37
+      typescript:
+        specifier: ^5.0.0
+        version: 5.9.3
+
   services/invoice-api:
     dependencies:
       dotenv:
@@ -526,6 +545,9 @@ packages:
   ipaddr.js@1.9.1:
     resolution: {integrity: sha512-0KI/607xoxSToH7GjN1FfSbLoU0+btTicjsQSWQlh/hZykN8KpmMf7uYwPW3R+akZ6R/w18ZlXSHBYXiYUPO3g==}
     engines: {node: '>= 0.10'}
+
+  jose@5.10.0:
+    resolution: {integrity: sha512-s+3Al/p9g32Iq+oqXxkW//7jk2Vig6FF1CFqzVXoTUXt2qz89YWbL+OwS17NFYEvxC35n0FKeGO2LGYSxeM2Gg==}
 
   js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
@@ -1140,6 +1162,8 @@ snapshots:
   inherits@2.0.4: {}
 
   ipaddr.js@1.9.1: {}
+
+  jose@5.10.0: {}
 
   js-tokens@4.0.0: {}
 
