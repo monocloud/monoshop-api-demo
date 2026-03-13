@@ -1,5 +1,7 @@
 "use server";
 
+import { getTokens } from "@monocloud/auth-nextjs";
+
 export interface Product {
   id: number;
   name: string;
@@ -26,8 +28,15 @@ export type ServerResponse<
     };
 
 export const getProducts = async (): Promise<ServerResponse<Product[]>> => {
+  const tokens = await getTokens();
+
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_PRODUCT_API_URL}/products`,
+    {
+      headers: {
+        Authorization: `Bearer ${tokens?.accessToken}`,
+      },
+    },
   );
 
   if (!res.ok) {
@@ -44,8 +53,15 @@ export const getProducts = async (): Promise<ServerResponse<Product[]>> => {
 };
 
 export const getInvoices = async (): Promise<ServerResponse<Invoice[]>> => {
+  const tokens = await getTokens();
+
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_INVOICE_API_URL}/invoices`,
+    {
+      headers: {
+        Authorization: `Bearer ${tokens?.accessToken}`,
+      },
+    },
   );
 
   if (!res.ok) {
