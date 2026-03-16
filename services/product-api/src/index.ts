@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import express from "express";
+import { authMiddleware } from "@mono-shop/auth";
 
 const app = express();
 const PORT = process.env.API_PORT || 4001;
@@ -14,7 +15,7 @@ const products = [
 
 app.use(express.json());
 
-app.get("/products", (req, res) => {
+app.get("/products", authMiddleware(["read:products"]), (req, res) => {
   res.json(products);
 });
 

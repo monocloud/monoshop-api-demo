@@ -8,6 +8,7 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@mono-shop/auth": "workspace:*",
     "dotenv": "^16.0.3",
     "express": "^4.18.2"
   },

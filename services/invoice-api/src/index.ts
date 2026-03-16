@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import express from "express";
+import { authMiddleware } from "@mono-shop/auth";
 
 const app = express();
 const PORT = 4002;
@@ -14,7 +15,7 @@ const invoices = [
 
 app.use(express.json());
 
-app.get("/invoices", (req, res) => {
+app.get("/invoices", authMiddleware(["read:invoices"]), (req, res) => {
   res.json(invoices);
 });
 
