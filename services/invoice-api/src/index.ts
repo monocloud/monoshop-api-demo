@@ -1,8 +1,11 @@
+import { protectApi } from '@monocloud/backend-node/express';
 import 'dotenv/config';
 import express from "express";
 
 const app = express();
-const PORT = 4002;
+const protect = protectApi();
+
+const PORT = process.env.API_PORT || 4002;
 
 // In-memory invoice data
 const invoices = [
@@ -14,7 +17,7 @@ const invoices = [
 
 app.use(express.json());
 
-app.get("/invoices", (req, res) => {
+app.get("/invoices", protect({ scopes: ["read:invoices"] }), (req, res) => {
   res.json(invoices);
 });
 

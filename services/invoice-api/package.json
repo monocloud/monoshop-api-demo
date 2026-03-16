@@ -8,6 +8,7 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@monocloud/backend-node": "0.1.3",
     "dotenv": "^16.0.3",
     "express": "^4.18.2"
   },

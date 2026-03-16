@@ -1,7 +1,10 @@
+import { protectApi } from '@monocloud/backend-node/express';
 import 'dotenv/config';
 import express from "express";
 
 const app = express();
+const protect = protectApi();
+
 const PORT = process.env.API_PORT || 4001;
 
 // In-memory product data
@@ -14,7 +17,7 @@ const products = [
 
 app.use(express.json());
 
-app.get("/products", (req, res) => {
+app.get("/products", protect({ scopes: ["read:products"] }), (req, res) => {
   res.json(products);
 });
 
