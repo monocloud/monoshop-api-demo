@@ -1,0 +1,19 @@
+{
+  "name": "monoshop",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "services/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "concurrently -n web,product-api,invoice-api -c blue,green,magenta \"npm run dev --workspace=monoshop-web\" \"npm run dev --workspace=monoshop-product-api\" \"npm run dev --workspace=@mono-shop/invoice-api\"",
+    "build": "npm run build --workspaces --if-present",
+    "lint": "npm run type-check --workspaces --if-present"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.0",
+    "concurrently": "^9.2.1",
+    "typescript": "^6.0.3"
+  }
+}
